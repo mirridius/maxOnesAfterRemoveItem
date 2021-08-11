@@ -1,0 +1,28 @@
+public class Ones {
+    public static void main(String[] args) {
+        assert(maxOnesAfterRemoveItem(new byte[]{0,0}) == 0);
+        assert(maxOnesAfterRemoveItem(new byte[]{0,1}) == 1);
+        assert(maxOnesAfterRemoveItem(new byte[]{1,0}) == 1);
+        assert(maxOnesAfterRemoveItem(new byte[]{1,1}) == 1);
+        assert(maxOnesAfterRemoveItem(new byte[]{1, 1, 0, 1, 1}) == 4);
+        assert(maxOnesAfterRemoveItem(new byte[]{1, 1, 0, 1, 1, 0, 1, 1, 1}) == 5);
+        assert(maxOnesAfterRemoveItem(new byte[]{1, 1, 0, 1, 1, 0, 1, 1, 1, 0}) == 5);
+    }
+
+
+    public static int maxOnesAfterRemoveItem(byte[] input) {
+        int countOnes = 0;
+        int[] longest = new int[2];
+        for(int i = 0; i <= input.length - 1; i++) {
+            if (input[i] == 0 || i == input.length - 1) {
+                if (input[i] == 1) countOnes++;
+                if (longest[0] < countOnes) longest[0] = countOnes;
+                else if (longest[1] < countOnes) longest[1] = countOnes;
+                countOnes = 0;
+            } else countOnes++;
+        }
+        int res = longest[0] + longest[1];
+        if (res == input.length) return --res;
+        else return res;
+    }
+}
