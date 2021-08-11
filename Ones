@@ -6,6 +6,8 @@ public class Ones {
         assert(maxOnesAfterRemoveItem(new byte[]{1,1}) == 1);
         assert(maxOnesAfterRemoveItem(new byte[]{1, 1, 0, 1, 1}) == 4);
         assert(maxOnesAfterRemoveItem(new byte[]{1, 1, 0, 1, 1, 0, 1, 1, 1}) == 5);
+        assert(maxOnesAfterRemoveItem(new byte[]{1, 1, 0, 1, 1, 1, 0, 1, 0}) == 5);
+        assert(maxOnesAfterRemoveItem(new byte[]{1, 0, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 0}) == 5);
         assert(maxOnesAfterRemoveItem(new byte[]{1, 1, 0, 1, 1, 0, 1, 1, 1, 0}) == 5);
     }
 
@@ -16,8 +18,8 @@ public class Ones {
         for(int i = 0; i <= input.length - 1; i++) {
             if (input[i] == 0 || i == input.length - 1) {
                 if (input[i] == 1) countOnes++;
-                if (longest[0] < countOnes) longest[0] = countOnes;
-                else if (longest[1] < countOnes) longest[1] = countOnes;
+                if (longest[1] < longest[0] && longest[1] < countOnes) longest[1] = countOnes;
+                else if (longest[0] < countOnes) longest[0] = countOnes;
                 countOnes = 0;
             } else countOnes++;
         }
